@@ -12,7 +12,7 @@ module.exports = () => {
     //세션에 저장한 아이디를 통해서 사용자 정보 객체를 불러옴
     passport.deserializeUser((id, done) => {
         User.findOne({ where: { id } })
-            .then(user => done(nul, user))
+            .then(user => done(null, user))
             .catch(err => done(err));
     });
 

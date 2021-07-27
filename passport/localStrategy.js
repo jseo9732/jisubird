@@ -12,7 +12,7 @@ module.exports = () => {
             const exUser = await User.findOne({ where: { email } });
             if (exUser) {
                 const result = await bcrypt.compare(password, exUser.password);
-                if (resilt) {
+                if (result) {
                     done(null, exUser);
                 } else {
                     done(null, false, { message: '비밀번호가 일치하지 않습니다.' });
