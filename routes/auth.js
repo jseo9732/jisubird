@@ -27,5 +27,30 @@ router.post('/join', isNotLoggedIn, async(req, res, next) => {
 });
 
 router.post('/login', isNotLoggedIn, (req, res, next) => {
-    passport.authenticate('local')
-})
+    passport.authenticate('local', (authError, user, info) => {
+        if (authError) {
+            console.error(authError);
+            return next(authError);
+        }
+        if (!user) {
+            return res.redirect(`/?loginError=${info.message}`);
+        }
+        return req.login(user, (loginError) => {
+            if (loginError) {
+                console.error(loginError);
+                return next(loginError);
+            }
+            return res.redirect('/');
+        });
+    })(req, res,next);
+});
+
+router.get('/kakao', passport.authenticate('kakao'));
+
+router.get('/kakao/callback', passport.authenticate('kakao', {
+    failureRedirect: '/',
+}), (re, res) => {
+    res.redirect('/');
+});
+
+module.exports = reouter;
