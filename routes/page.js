@@ -1,4 +1,5 @@
 const express = require('express');
+const { Post, User } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
@@ -19,12 +20,23 @@ router.get('/join', isNotLoggedIn, (req, res) => {
     res.render('join', {title: '회원가입 - NodeBird' });
 });
 
-router.get('/', (req, res, next) => {
-    const twits = [];
-    res.render('main', {
+router.get('/', async (req, res, next) => {
+    try {
+      const posts = await Post.findAll({
+        include: {
+          model: User,
+          attributes: ['id', 'nick'],
+        },
+        order: [['createdAt', 'DESC']],
+      });
+      res.render('main', {
         title: 'NodeBird',
-        twits,
-    });
-});
+        twits: posts,
+      });
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+ });
 
 module.exports = router;
