@@ -11,11 +11,22 @@ module.exports = () => {
 
     //세션에 저장한 아이디를 통해서 사용자 정보 객체를 불러옴
     passport.deserializeUser((id, done) => {
-        User.findOne({ where: { id } })
-            .then(user => done(null, user))
-            .catch(err => done(err));
-    });
-
-    local();
-    kakao();
-};
+        User.findOne({
+          where: { id },
+          include: [{
+            model: User,
+            attributes: ['id', 'nick'],
+            as: 'Followers',
+          }, {
+            model: User,
+            attributes: ['id', 'nick'],
+            as: 'Followings',
+          }],
+        })
+          .then(user => done(null, user))
+          .catch(err => done(err));
+      });
+    
+      local();
+      kakao();
+    };
