@@ -5,6 +5,28 @@ const User = require('../models/user');
 
 const router = express.Router();
 
+router.get('/', async (req, res, next) => {
+  const query = req.query.user;
+  if (!query) {
+    return res.redirect('/');
+  }
+  try {
+    const user = await User.findOne({ where: { nick: query } });
+    let nick = [];
+    if (user) {
+      nick = await user.getPosts({ include: [{ model: User }] });
+    }
+
+    return res.render('main', {
+      title: `${query} 검색 결과 | JisuBird`,
+      twits: nick,
+    });
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
 router.post('/:id/follow', isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: req.user.id } });

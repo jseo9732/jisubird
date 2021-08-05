@@ -21,6 +21,10 @@
         </div>
       {% endif %}
       <div class="twits">
+        <form id="user-form" action="/user">
+          <input type="text" name="user" placeholder="유저 검색">
+          <button class="btn">검색</button>
+        </form>
         <form id="hashtag-form" action="/hashtag">
           <input type="text" name="hashtag" placeholder="태그 검색">
           <button class="btn">검색</button>
@@ -39,7 +43,7 @@
             {% set ht = item.slice(1) %}
               <div class="twit-hashtag"><a href='#' onclick="location.href='http://localhost:8001/hashtag?hashtag='+'{{ht}}';">{{item}}</a></div>
             {% else %}
-            <div class="twit-content">{{item}}</div>
+              <div class="twit-content">{{item}}</div>
             {% endif %}
             {% endfor %}
             {% if twit.img %}
