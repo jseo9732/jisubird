@@ -33,7 +33,15 @@
             {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
               <button class="twit-follow">팔로우하기</button>
             {% endif %}
-            <div class="twit-content">{{twit.content}}</div>
+            {% set items = twit.content.split(' ') %}
+            {% for item in items %}
+            {% if '#' in item %}
+            {% set ht = item.slice(1) %}
+              <div class="twit-hashtag"><a href='#' onclick="location.href='http://localhost:8001/hashtag?hashtag='+'{{ht}}';">{{item}}</a></div>
+            {% else %}
+            <div class="twit-content">{{item}}</div>
+            {% endif %}
+            {% endfor %}
             {% if twit.img %}
               <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
             {% endif %}
