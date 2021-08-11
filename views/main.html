@@ -37,6 +37,10 @@
             {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
               <button class="twit-follow">팔로우하기</button>
             {% endif %}
+            /* 210811 안서현 언팔로우 버튼 생성*/
+            {% if followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
+            <button class="twit-unfollow">팔로우 끊기</button>
+            {% endif %}
             {% set items = twit.content.split(' ') %}
             {% for item in items %}
             {% if '#' in item %}
@@ -86,6 +90,26 @@
                 })
                 .catch((err) => {
                   console.error(err);
+                });
+            }
+          }
+        }
+      });
+    });
+    /* 210811 안서현 언팔로우 구현*/
+    document.querySelectorAll('.twit-unfollow').forEach(function(tag){
+      tag.addEventListener('click',function() {
+        const myId = document.querySelector('#my-id');
+        if (myId){ //로그인된 사용자 존재하면
+          const userId = tag.parentNode.querySelector('.twit-user-id').value;
+          if (myId !== userId.value){ //현재 사용자와 팔로잉끊기한 사용자가 다르면
+            if (confirm('팔로잉을 끊으시겠습니까?')){ //팔로잉끊기 여부 묻기
+              axios.post(`/user/${userId}/unfollow`) //routes/user.js의 unfollow 코드로 이동
+              .then(()=>{
+                location.reload();
+              })
+                .catch((error)=>{
+                  console.error(error);
                 });
             }
           }
