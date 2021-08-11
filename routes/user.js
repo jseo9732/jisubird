@@ -42,4 +42,18 @@ router.post('/:id/follow', isLoggedIn, async (req, res, next) => {
   }
 });
 
+/* 210811 안서현 언팔로우 구현 */
+router.post('/:id/unfollow', isLoggedIn, async(req,res,next) => {
+  try{
+    const user = await User.findOne({ where: { id: req.params.id } });
+    if (user){
+      await user.removeFollower([parseInt(req.user.id)]);
+      res.send('success');
+    }
+  } catch (error){
+    console.error(error);
+    next(error); 
+  } 
+});
+
 module.exports = router;
