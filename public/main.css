@@ -112,7 +112,7 @@ footer { text-align: center; }
 }
 
 /* 댓글관련 코드 */
-#comment-form{
+.comment-form{
   margin-top: 15px;
   width: 100%; 
   padding: 5px;
@@ -123,7 +123,7 @@ footer { text-align: center; }
   display: inline;
 }
 
-#comment { 
+.comment { 
   display: inline;
   border: 1px solid silver;
   width: 90%; 
@@ -131,7 +131,7 @@ footer { text-align: center; }
   margin-right: 5px;
 }
 
-#comment-btn {
+.comment-btn {
   float: right;
   color: white;
   background: rgb(226, 80, 109);
