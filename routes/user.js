@@ -14,12 +14,12 @@ router.get('/', async (req, res, next) => {
     const user = await User.findOne({ where: { nick: query } });
     let nick = [];
     if (user) {
-      nick = await user.getPosts({ include: [{ model: User }] });
+      post = await user.getPosts({ include: [{ model: User }] });
     }
 
     return res.render('main', {
       title: `${query} 검색 결과 | JisuBird`,
-      twits: nick,
+      twits: post,
     });
   } catch (error) {
     console.error(error);
