@@ -59,6 +59,7 @@
             {% endif %}
             <form class="comment-form" action="/comment" method="post">
               <textarea class="comment" name="comment" maxlength="50"></textarea>
+              <input type="hidden" name="twitId" value="{{twit.id}}">
               <button class="comment-btn btn" type="submit">작성</button>
             </form>
           </div>
