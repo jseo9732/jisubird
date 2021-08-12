@@ -33,27 +33,36 @@
           <div class="twit">
             <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
             <input type="hidden" value="{{twit.id}}" class="twit-id">
-            <div class="twit-author">{{twit.User.nick}}</div>
+            <div 
+              class="twit-author">{{twit.User.nick}}
             {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
               <button class="twit-follow">팔로우하기</button>
             {% endif %}
             <!--210811 안서현 언팔로우 버튼 생성-->
             {% if followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
-            <button class="twit-unfollow">팔로우 끊기</button>
+              <button class="twit-unfollow">팔로우 끊기</button>
             {% endif %}
-            {% set items = twit.content.split(' ') %}
-            {% for item in items %}
-            {% if '#' in item %}
-            {% set ht = item.slice(1) %}
-              <div class="twit-hashtag"><a href='#' onclick="location.href='http://localhost:8001/hashtag?hashtag='+'{{ht}}';">{{item}}</a></div>
-            {% else %}
-              <div class="twit-content">{{item}}</div>
-            {% endif %}
-            {% endfor %}
+            </div>
+            <div class="twit-box">
+              {% set items = twit.content.split(' ') %}
+              {% for item in items %}
+              {% if '#' in item %}
+              {% set ht = item.slice(1) %}
+                <div class="twit-hashtag"><a href='#' onclick="location.href='http://localhost:8001/hashtag?hashtag='+'{{ht}}';">{{item}}</a></div>
+              {% else %}
+                <div class="twit-content">{{item}}</div>
+              {% endif %}
+              {% endfor %}
+            </div>
             {% if twit.img %}
               <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
             {% endif %}
+            <form id="comment-form" action="/post" method="post">
+              <textarea id="comment" name="comment" maxlength="50"></textarea>
+              <button id="comment-btn" type="submit" class="btn">작성</button>
+            </form>
           </div>
+          
         {% endfor %}
       </div>
     </div>

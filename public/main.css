@@ -89,7 +89,7 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
   position: relative;
   margin-bottom: 10px;
 }
-.twit-author { display: inline-block; font-weight: bold; margin-right: 10px; }
+.twit-author { display: inline-block; font-weight: bold; width: 100; }
 .twit-follow, .twit-unfollow {
   padding: 1px 5px;
   background: #fff;
@@ -106,3 +106,34 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
 #join-form { padding: 10px; text-align: center; }
 #hashtag-form { text-align: right; }
 footer { text-align: center; }
+
+.twit-content, .twit-hashtag {
+  display: inline;
+}
+
+/* 댓글관련 코드 */
+#comment-form{
+  margin-top: 15px;
+  width: 100%; 
+  padding: 5px;
+  background-color: rgb(248, 183, 183);
+}
+
+.comment-group{
+  display: inline;
+}
+
+#comment { 
+  display: inline;
+  border: 1px solid silver;
+  width: 90%; 
+  min-height: 10px;
+  margin-right: 5px;
+}
+
+#comment-btn {
+  float: right;
+  color: white;
+  background: rgb(226, 80, 109);
+  border: none;
+}
