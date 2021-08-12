@@ -37,8 +37,8 @@
             {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
               <button class="twit-follow">팔로우하기</button>
             {% endif %}
-            /* 210811 안서현 언팔로우 버튼 생성*/
-            {% if followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
+            <!--210811 안서현 언팔로우 버튼 생성-->
+            {% if followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
             <button class="twit-unfollow">팔로우 끊기</button>
             {% endif %}
             {% set items = twit.content.split(' ') %}
