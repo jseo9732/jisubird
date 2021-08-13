@@ -107,6 +107,21 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
 #hashtag-form { text-align: right; }
 footer { text-align: center; }
 
+.search {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
+
+#user-form {
+  display: inline;
+  margin-right: 10px;
+}
+
+#hashtag-form {
+  display: inline;
+}
+
 .twit-content, .twit-hashtag {
   display: inline;
 }

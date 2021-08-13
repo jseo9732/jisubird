@@ -21,14 +21,16 @@
         </div>
       {% endif %}
       <div class="twits">
-        <form id="user-form" action="/user">
-          <input type="text" name="user" placeholder="유저 검색">
-          <button class="btn">검색</button>
-        </form>
-        <form id="hashtag-form" action="/hashtag">
-          <input type="text" name="hashtag" placeholder="태그 검색">
-          <button class="btn">검색</button>
-        </form>
+        <div class="search">
+          <form id="user-form" action="/user">
+            <input type="text" name="user" placeholder="유저 검색">
+            <button class="btn">검색</button>
+          </form>
+          <form id="hashtag-form" action="/hashtag">
+            <input type="text" name="hashtag" placeholder="태그 검색">
+            <button class="btn">검색</button>
+          </form>
+        </div>
         {% for twit in twits %}
           <div class="twit">
             <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
