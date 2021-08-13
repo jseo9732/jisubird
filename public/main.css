@@ -110,7 +110,7 @@ footer { text-align: center; }
 .search {
   display: flex;
   justify-content: flex-end;
-  margin: 10px;
+  margin: 10px 0px 10px 10px;
 }
 
 #user-form {
