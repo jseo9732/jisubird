@@ -59,13 +59,29 @@ router.get('/', async (req, res, next) => {
   try {
     const hashtag = await Hashtag.findOne({ where: { title: query } });
     let posts = [];
+    let comments = [];
     if (hashtag) {
-      posts = await hashtag.getPosts({ include: [{ model: User }] });
+      posts = await hashtag.getPosts({ 
+        include: [{ model: User }],
+        order: [['createdAt', 'DESC']]
+       });
+       comments = await Comment.findAll({
+        include: [{
+          model: User,
+          attributes: ['id', 'nick'],
+        },
+        {
+          model: Post,
+          attributes: ['id'],
+        }],
+        order: [['createdAt', 'ASC']],
+      });
     }
 
     return res.render('main', {
       title: `#${query} 검색 결과 | JisuBird`,
       twits: posts,
+      comments: comments,
     });
   } catch (error) {
     console.error(error);

@@ -1,7 +1,6 @@
 const express = require('express');
-
+const { Post, User, Comment } = require('../models');
 const { isLoggedIn } = require('./middlewares');
-const User = require('../models/user');
 
 const router = express.Router();
 
@@ -13,13 +12,29 @@ router.get('/', async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { nick: query } });
     let posts = [];
+    let comments = [];
     if (user) {
-      posts = await user.getPosts({ include: [{ model: User }] });
+      posts = await user.getPosts({ 
+        include: [{ model: User }],
+        order: [['createdAt', 'DESC']] 
+      });
+      comments = await Comment.findAll({
+        include: [{
+          model: User,
+          attributes: ['id', 'nick'],
+        },
+        {
+          model: Post,
+          attributes: ['id'],
+        }],
+        order: [['createdAt', 'ASC']],
+      });
     }
 
     return res.render('main', {
       title: `${query} 검색 결과 | JisuBird`,
       twits: posts,
+      comments: comments,
     });
   } catch (error) {
     console.error(error);
