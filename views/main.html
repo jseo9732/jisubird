@@ -35,8 +35,8 @@
           <div class="twit">
             <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
             <input type="hidden" value="{{twit.id}}" class="twit-id">
-            <div 
-              class="twit-author">{{twit.User.nick}}
+            <div class="twit-author">
+              {{twit.User.nick}}
             {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
               <button class="twit-follow">팔로우하기</button>
             {% endif %}
@@ -59,11 +59,21 @@
             {% if twit.img %}
               <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
             {% endif %}
-            <form class="comment-form" action="/comment" method="post">
-              <textarea class="comment" name="comment" maxlength="50"></textarea>
-              <input type="hidden" name="twitId" value="{{twit.id}}">
-              <button class="comment-btn btn" type="submit">작성</button>
-            </form>
+            <div class=comment_box>
+              <form class="comment-form" action="/comment" method="post">
+                <textarea class="comment_input" name="comment" maxlength="50"></textarea>
+                <input type="hidden" name="twitId" value="{{twit.id}}">
+                <button class="comment-btn btn" type="submit">작성</button>
+              </form>
+              {% for comment in comments %}
+                {% if twit.id == comment.PostId %}
+                  <div class="comment">
+                    <span class="comment-author">{{comment.User.nick}}</span>
+                    <span class="comment-content">{{comment.content}}</span>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
         {% endfor %}
       </div>

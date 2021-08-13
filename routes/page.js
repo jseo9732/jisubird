@@ -1,5 +1,5 @@
 const express = require('express');
-const { Post, User, Hashtag } = require('../models');
+const { Post, User, Hashtag, Comment } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
@@ -29,9 +29,21 @@ router.get('/', async (req, res, next) => {
         },
         order: [['createdAt', 'DESC']],
       });
+      const comments = await Comment.findAll({
+        include: [{
+          model: User,
+          attributes: ['id', 'nick'],
+        },
+        {
+          model: Post,
+          attributes: ['id'],
+        }],
+        order: [['createdAt', 'ASC']],
+      });
       res.render('main', {
         title: 'JisuBird',
         twits: posts,
+        comments: comments,
       });
     } catch (err) {
       console.error(err);
