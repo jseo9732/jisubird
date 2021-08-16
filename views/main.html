@@ -68,7 +68,10 @@
                   <div class="comment">
                     <span class="comment-author">{{comment.User.nick}}</span>
                     <span class="comment-content">{{comment.content}}</span>
-                    <button type="button" class="delBtn">삭제</button>
+                    <form action="/comment/delete_process" method="post" class="comment_delBtn">
+                      <input type="hidden" name="id" value="{{comment.id}}">
+                      <input type="submit" value="삭제">
+                    </form>
                   </div>
                 {% endif %}
               {% endfor %}

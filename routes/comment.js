@@ -18,4 +18,18 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     }
 });
 
+router.post('/delete_process', isLoggedIn, async (req, res, next) => {
+    try {
+        await Comment.destroy({
+            where: {
+                id: req.body.id
+            }
+        });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
 module.exports = router;

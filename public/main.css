@@ -168,7 +168,8 @@ footer { text-align: center; }
 }
 
 /* 삭제관련 코드 */
-.delBtn {
+.comment_delBtn {
+  display: inline;
   position: absolute;
   right: 5px;
 }
