@@ -168,8 +168,16 @@ footer { text-align: center; }
 }
 
 /* 삭제관련 코드 */
-.comment_delBtn {
+.comment_delForm {
   display: inline;
   position: absolute;
   right: 5px;
+}
+
+.comment_delBtn {
+  cursor: pointer;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid silver;
+  color: crimson;
 }
