@@ -160,8 +160,15 @@ footer { text-align: center; }
 .comment {
   font-size: 13px;
   padding: 0px 10px 10px 10px;
+  position: relative;
 }
 
 .comment-author {
   font-weight: bold;
+}
+
+/* 삭제관련 코드 */
+.delBtn {
+  position: absolute;
+  right: 5px;
 }
