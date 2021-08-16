@@ -22,7 +22,8 @@ router.post('/delete_process', isLoggedIn, async (req, res, next) => {
     try {
         await Comment.destroy({
             where: {
-                id: req.body.id
+                id: req.body.id,
+                UserId: req.session.passport.user
             }
         });
         res.redirect('/');
