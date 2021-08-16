@@ -192,8 +192,8 @@ footer { text-align: center; }
 .comment_delBtn {
   cursor: pointer;
   border-radius: 4px;
-  background: white;
-  border: 1px solid silver;
-  color: crimson;
+  background: rgb(255, 238, 238);
+  border: 1px solid white;
+  color: rgb(77, 77, 77);
 }
 

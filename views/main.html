@@ -53,10 +53,12 @@
                 <div class="twit-content">{{item}}</div>
               {% endif %}
               {% endfor %}
-              <form action="/post/delete_process" method="post" class="twit_delForm">
-                <input type="hidden" name="id" value="{{twit.id}}">
-                <input type="submit" value="삭제" class='twit_delBtn'>
-              </form>
+              {% if twit.User.id == user.id %}
+                <form action="/post/delete_process" method="post" class="twit_delForm">
+                  <input type="hidden" name="id" value="{{twit.id}}">
+                  <input type="submit" value="삭제" class='twit_delBtn'>
+                </form>
+              {% endif %}
             </div>
             {% if twit.img %}
               <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
@@ -72,10 +74,12 @@
                   <div class="comment">
                     <span class="comment-author">{{comment.User.nick}}</span>
                     <span class="comment-content">{{comment.content}}</span>
-                    <form action="/comment/delete_process" method="post" class="comment_delForm">
-                      <input type="hidden" name="id" value="{{comment.id}}">
-                      <input type="submit" value="삭제" class='comment_delBtn'>
-                    </form>
+                    {% if comment.User.id == user.id %}
+                      <form action="/comment/delete_process" method="post" class="comment_delForm">
+                        <input type="hidden" name="id" value="{{comment.id}}">
+                        <input type="submit" value="삭제" class='comment_delBtn'>
+                      </form>
+                    {% endif %}
                   </div>
                 {% endif %}
               {% endfor %}
