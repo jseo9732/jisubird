@@ -168,6 +168,21 @@ footer { text-align: center; }
 }
 
 /* 삭제관련 코드 */
+.twit_delForm {
+  display: inline;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.twit_delBtn {
+  cursor: pointer;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid silver;
+  color: crimson;
+}
+
 .comment_delForm {
   display: inline;
   position: absolute;
@@ -181,3 +196,4 @@ footer { text-align: center; }
   border: 1px solid silver;
   color: crimson;
 }
+

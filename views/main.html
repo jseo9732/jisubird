@@ -53,6 +53,10 @@
                 <div class="twit-content">{{item}}</div>
               {% endif %}
               {% endfor %}
+              <form action="/post/delete_process" method="post" class="twit_delForm">
+                <input type="hidden" name="id" value="{{twit.id}}">
+                <input type="submit" value="삭제" class='twit_delBtn'>
+              </form>
             </div>
             {% if twit.img %}
               <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>

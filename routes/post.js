@@ -59,4 +59,19 @@ router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     }
 });
 
+router.post('/delete_process', isLoggedIn, async (req, res, next) => {
+  try {
+      await Post.destroy({
+          where: {
+              id: req.body.id,
+              UserId: req.session.passport.user
+          }
+      });
+      res.redirect('/');
+  } catch (error) {
+      console.error(error);
+      next(error);
+  }
+});
+
 module.exports = router;
