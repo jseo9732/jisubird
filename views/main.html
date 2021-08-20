@@ -43,6 +43,15 @@
             {% if followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
               <button class="twit-unfollow">팔로우 끊기</button>
             {% endif %}
+            <!--210820 좋아요 버튼 생성-->
+            <input type="hidden" value="{{twit.id}}" class="twit-id">
+            {% if not LikerIdList.includes(user.id) %}
+            <button class="like">좋아요</button>
+            {% endif %}
+            {% if LikerIdList.includes(user.id) %}
+            <button class ="unlike"> 좋아요 취소</button>
+            {% endif%}
+              
             <div class="twit-box">
               {% set items = twit.content.split(' ') %}
               {% for item in items %}
@@ -145,6 +154,36 @@
             }
           }
         }
+      });
+    });
+      
+    /*210820*/
+    document.querySelectorAll('.like').forEach(function(tag) {
+      tag.addEventListener('click', function() {
+        const postId = tag.parentNode.querySelector('.twit-id').value;
+        axios.post(`/like/${postId}/like`)
+        .then(() => {
+          location.reload();
+          })
+          .catch((err) => {
+            console.error(err);
+            });
+      });
+    });
+
+    document.querySelectorAll('.unlike').forEach(function(tag) {
+      tag.addEventListener('click', function() {
+        const myId = document.querySelector('#my-id');
+        if (myId){
+          const postId = tag.parentNode.querySelector('.twit-id').value;
+          axios.post(`/like/${postId}/unlike`)
+        .then(() => {
+          location.reload();
+          })
+          .catch((error) => {
+            console.error(error);
+            });
+          }
       });
     });
   </script>
