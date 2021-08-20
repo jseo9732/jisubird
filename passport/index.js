@@ -21,7 +21,11 @@ module.exports = () => {
             model: User,
             attributes: ['id', 'nick'],
             as: 'Followings',
-          }],
+          }, //210820 추가
+            {
+            model: Post,
+            as: 'LikedPosts',
+            }],
         })
           .then(user => done(null, user))
           .catch(err => done(err));
