@@ -197,3 +197,22 @@ footer { text-align: center; }
   color: rgb(77, 77, 77);
 }
 
+/* 210820 좋아요 버튼 추가 */
+.like  {
+  padding: 1px 5px;
+  background: crimson;
+  border: 1px solid silver;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+.unlike{
+  padding: 1px 5px;
+  background: #fff;
+  border: 1px solid silver;
+  border-radius: 5px;
+  color: crimson;
+  font-size: 12px;
+  cursor: pointer;
+}
